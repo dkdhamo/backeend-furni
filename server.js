@@ -12,10 +12,10 @@ app.use(cors());
 
 // Replace with your MySQL database configuration
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Dhamo@2807',
-  database: 'furnituredb',
+  host: 'b33uqxdtus2o3xmkisan-mysql.services.clever-cloud.com',
+  user: 'ubh7sgwpx1gromc1',
+  password: 'uOYrSQMDOERw9BY8hUqO',
+  database: 'b33uqxdtus2o3xmkisan',
 });
 
 connection.connect((err) => {
