@@ -63,7 +63,25 @@ app.get('/api/furniture', (req, res) => {
       res.json(result);
     });
   });
-
+  
+app.get('/api/filter', (req, res) => {
+    const selectedDepartment = req.query.selectedDepartment;
+  
+    // Construct SQL query based on the selected department
+    const query = selectedDepartment
+      ? `SELECT * FROM furniture WHERE selectedDepartment = ?`
+      : 'SELECT * FROM furniture';
+  
+    // Execute the SQL query with parameterized query
+    connection.query(query,[selectedDepartment], (err, results) => {
+      if (err) {
+        console.error('Error executing SQL query:', err);
+        res.status(500).json({ error: 'Failed to fetch data from the database' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
