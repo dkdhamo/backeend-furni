@@ -12,10 +12,10 @@ app.use(cors());
 
 // Replace with your MySQL database configuration
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Dhamo@2807',
-  database: 'furnituredb',
+    host: 'b33uqxdtus2o3xmkisan-mysql.services.clever-cloud.com',
+    user: 'ubh7sgwpx1gromc1',
+    password: 'uOYrSQMDOERw9BY8hUqO',
+    database: 'b33uqxdtus2o3xmkisan',
 });
 
 connection.connect((err) => {
@@ -61,6 +61,25 @@ app.get('/api/furniture', (req, res) => {
       }
   
       res.json(result);
+    });
+  });
+
+  app.get('/api/filter', (req, res) => {
+    const selectedDepartment = req.query.selectedDepartment;
+  
+    // Construct SQL query based on the selected department
+    const query = selectedDepartment
+      ? `SELECT * FROM furniture WHERE selectedDepartment = ?`
+      : 'SELECT * FROM furniture';
+  
+    // Execute the SQL query with parameterized query
+    connection.query(query,[selectedDepartment], (err, results) => {
+      if (err) {
+        console.error('Error executing SQL query:', err);
+        res.status(500).json({ error: 'Failed to fetch data from the database' });
+      } else {
+        res.json(results);
+      }
     });
   });
 
