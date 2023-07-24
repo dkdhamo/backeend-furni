@@ -50,6 +50,20 @@ app.post('/api/furniture', (req, res) => {
   });
 });
 
+app.get('/api/furniture', (req, res) => {
+    const sql = 'SELECT * FROM furniture';
+  
+    connection.query(sql, (err, result) => {
+      if (err) {
+        console.error('Error fetching furniture data:', err);
+        res.status(500).json({ error: 'Error fetching furniture data from the database' });
+        return;
+      }
+  
+      res.json(result);
+    });
+  });
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
